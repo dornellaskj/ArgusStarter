@@ -2,7 +2,7 @@ import path from 'path'
 import express from 'express'
 const app = express(),
             DIST_DIR = __dirname,
-            HTML_FILE = path.join(DIST_DIR, './src/components.js')
+            HTML_FILE = path.join(DIST_DIR, './main.js')
 app.use(express.static(DIST_DIR))
 
 app.get('*', (req, res) => {
