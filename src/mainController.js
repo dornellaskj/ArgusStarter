@@ -1,0 +1,1 @@
+module.exports.data = {hello: "welcome to the thunder dome!!!"}

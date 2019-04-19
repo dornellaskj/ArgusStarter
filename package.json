@@ -6,12 +6,14 @@
   "scripts": {
     "watch": "npm run buildDev && npm run start",
     "buildDev": "webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
-    "buildProd": "webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.config.js",
+    "build": "webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.config.js",
     "start": "node ./dist/server.js"
   },
   "author": "Kevin Dornellas",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.6.1",
+    "ejs-webpack-loader": "^2.2.2",
     "express": "^4.16.4"
   },
   "devDependencies": {

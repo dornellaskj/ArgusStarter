@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebPackPlugin = require('html-webpack-plugin')
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const controller = require('./src/mainController.js');
+
 module.exports = {
   entry: {
     main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/components.js']
@@ -26,8 +28,10 @@ module.exports = {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
-            //options: { minimize: true }
+            loader: "ejs-webpack-loader",
+            options: {
+              data: controller.data
+            }
           }
         ]
       },

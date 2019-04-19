@@ -3,6 +3,8 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const controller = require('./src/mainController.js');
+
 module.exports = {
   entry: {
     main: './src/components.js'
@@ -42,8 +44,11 @@ module.exports = {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
-            options: { minimize: true }
+            loader: "ejs-webpack-loader",
+            options: {
+              data: controller.data,
+              htmlmin: true
+            }
           }
         ]
       },
