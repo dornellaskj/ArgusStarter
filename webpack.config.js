@@ -7,7 +7,8 @@ const controller = require('./src/mainController.js');
 
 module.exports = {
   entry: {
-    main: './src/components.js'
+    main: './src/views/helloWorld/index.js',
+    login: './src/views/login/index.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -67,8 +68,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/helloWorld/index.html",
-      filename: "./index.html"
+      template: "./src/views/helloWorld/index.html",
+      filename: "./index.html",
+      excludeChunks: [ 'server' ]
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/views/login/index.html",
+      filename: "./login/index.html",
+      excludeChunks: [ 'server' ]
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",

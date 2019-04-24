@@ -5,8 +5,9 @@ const controller = require('./src/mainController.js');
 
 module.exports = {
   entry: {
-    main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/components.js']
-  },
+    main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/views/helloWorld/index.js'],
+    login: ['webpack-hot-middleware/client?path=/login__webpack_hmr&timeout=20000', './src/views/login/index.js']
+    },
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
@@ -37,7 +38,7 @@ module.exports = {
       },
       { 
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: ['style-loader','css-loader']
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -47,11 +48,16 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/helloWorld/index.html",
+      template: "./src/views/helloWorld/index.html",
       filename: "./index.html",
       excludeChunks: [ 'server' ]
     }),
+    new HtmlWebPackPlugin({
+      template: "./src/views/login/index.html",
+      filename: "./login/index.html",
+      excludeChunks: [ 'server' ]
+    }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
   ]
 }
