@@ -1,4 +1,4 @@
-import './css/style.css'
+import './css/style.scss'
 import './JS/index.js'
 import './index.html'
 

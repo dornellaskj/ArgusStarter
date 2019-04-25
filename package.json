@@ -7,14 +7,18 @@
     "watch": "npm run buildDev && npm run start",
     "buildDev": "webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
     "build": "webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.config.js",
-    "start": "node ./dist/server.js"
+    "start": "node ./dist/server.js",
+    "gen:view": "bash ./createView.sh",
+    "gen:component": "bash ./createComponent.sh"
   },
   "author": "Kevin Dornellas",
   "license": "ISC",
   "dependencies": {
+    "css-hot-loader": "^1.4.4",
     "ejs": "^2.6.1",
     "ejs-webpack-loader": "^2.2.2",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -25,7 +29,9 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.6.0",
+    "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.30.0",

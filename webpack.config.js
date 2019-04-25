@@ -5,6 +5,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const controller = require('./src/mainController.js');
 
+
 module.exports = {
   entry: {
     main: './src/views/helloWorld/index.js',
@@ -61,8 +62,9 @@ module.exports = {
       {
         // Loads CSS into a file when you import it via Javascript
         // Rules are set in MiniCssExtractPlugin
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.scss$/,
+        use: 
+          [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
     ]
   },
@@ -70,12 +72,12 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/views/helloWorld/index.html",
       filename: "./index.html",
-      excludeChunks: [ 'server' ]
+      chunks: ['main'],
     }),
     new HtmlWebPackPlugin({
       template: "./src/views/login/index.html",
       filename: "./login/index.html",
-      excludeChunks: [ 'server' ]
+      chunks: ['login'],
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",

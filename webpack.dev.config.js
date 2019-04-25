@@ -1,12 +1,12 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const controller = require('./src/mainController.js');
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: {
     main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/views/helloWorld/index.js'],
-    login: ['webpack-hot-middleware/client?path=/login__webpack_hmr&timeout=20000', './src/views/login/index.js']
+    login: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/views/login/index.js']
     },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -37,8 +37,11 @@ module.exports = {
         ]
       },
       { 
-        test: /\.css$/,
-        use: ['style-loader','css-loader']
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader','sass-loader'],
+        }),
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -50,14 +53,15 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/views/helloWorld/index.html",
       filename: "./index.html",
-      excludeChunks: [ 'server' ]
+      chunks: ['main'],
     }),
     new HtmlWebPackPlugin({
       template: "./src/views/login/index.html",
       filename: "./login/index.html",
-      excludeChunks: [ 'server' ]
+      chunks: ['login'],
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new ExtractTextPlugin('[name].css'),
   ]
 }
